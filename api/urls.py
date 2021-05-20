@@ -15,6 +15,6 @@ urlpatterns =[
     path('add_guest/',views.add_guest,name='add_guest'),
     # ex:/search_guest/
     path('search_guest/',views.search_guest,name='search_guest'),
-    # ex:/user_sign/
+    # ex:/user_sign/ 发布会签到
     path('user_sign/',views.user_sign,name='user_sign'),
 ]
