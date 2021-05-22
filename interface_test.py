@@ -7,7 +7,7 @@ import requests
 
 # 发布会查询接口
 url = 'http://127.0.0.1:8000/api/search_event/'
-r = requests.get(url,{'eid':1})
+r = requests.get(url,params={'eid':1})
 result = r.json()
 print(result)
 # 断言接口返回值
