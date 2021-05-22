@@ -42,13 +42,15 @@ def search_event(request):
     eid = request.GET.get('eid','')
     name = request.GET.get('name','')
 
-
+    # 发布会eid和name都为空，提示parameter
     if eid == '' and name == '':
         return JsonResponse({'status':10021,'message':'parameter error'})
+
     if eid != '':
         event = {}
         try:
             result = Event.objects.get(id=eid)
+        # 发布会eid不存在，查询为空
         except ObjectDoesNotExist:
             return JsonResponse({'status':10022,'message':'query result is empty'})
 
