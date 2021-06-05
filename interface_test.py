@@ -7,11 +7,12 @@ import requests
 
 # 发布会查询接口
 url = 'http://127.0.0.1:8000/api/search_event/'
-r = requests.get(url,params={'eid':1})
+r = requests.get(url,params={'eid':101})
+print(r)
 result = r.json()
 print(result)
 # 断言接口返回值
 assert result['status'] == 200
 assert result['message'] == 'query success'
-assert result['data']['name'] == '小米发布会1'
-assert result['data']['address'] =='北京'
+assert result['data']['name'] == '红米Pro发布会'
+assert result['data']['address'] =='北京会展中心'
