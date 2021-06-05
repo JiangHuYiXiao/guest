@@ -10,12 +10,15 @@ from pymysql.err import OperationalError
 #  ============ 读取db_config.ini文件设置 ============
 
 
-base_dir = str(os.path.dirname(os.getcwd()))
-# print(base_dir)
-# base_dir = base_dir.replace('\\','/')
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 file_path = base_dir + '\db_config.ini'
-# print(file_path)
-# D:\guest\pyrequest\db_config.ini
+print(file_path)
+
+# parent_dir1 = os.path.dirname((os.path.abspath(__file__)))  当前文件的父目录
+# parent_dir2 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))    当前文件的父目录的父目录
+# os.path.abspath(__file__)  获取当前脚本的完整路径
+
+
 config = configparser.ConfigParser()
 config.read(file_path,encoding='utf-8')
 host = config.get("mysqlconf","host")
@@ -45,12 +48,12 @@ class DB:
             # python报OperationalError: (1366, "Incorrect string value..."
 
     # 清除表数据
-    # def clear(self,table_name):
-    #     clear_sql = 'delete from '+table_name+';'
-    #     with self.conn.cursor() as cursor:
-    #         cursor.execute('SET FOREIGN_KEY_CHECK=0;')   #  来禁用外键约束.
-    #         cursor.execute(clear_sql)
-    #     self.conn.commit()
+    def clear(self,table_name):
+        clear_sql = 'delete from '+table_name+';'
+        with self.conn.cursor() as cursor:
+            cursor.execute('SET FOREIGN_KEY_CHECKS=0;')   #  来禁用外键约束.
+            cursor.execute(clear_sql)
+        self.conn.commit()
 
     # 插入表数据
     def insert(self,table_name,table_data):
@@ -80,8 +83,9 @@ class DB:
 
 if __name__ =='__main__':
     db = DB()
-    table_name = 'sign_event'
+    table_name = 'sign_guest'
     # 因为limit为sql关键字所以将表字段修改为guest_limit
-    table_data = {'id':46,'name':'hongmi','guest_limit':2000,'status':1,'address':'shanghai','start_time':'2021-08-08 08:00:00','create_time':'2021-01-01 08:00:00'}
+    table_data = {'id':10,'realname':'alen','phone':'13511001100','sign':0,'email':'alen@mail.com','create_time':'2021-01-01 00:00:00','event_id':101}
+    db.clear(table_name)
     db.insert(table_name,table_data)
     db.close()
