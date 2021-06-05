@@ -9,7 +9,7 @@ from django.db import models
 # 发布会表
 class Event(models.Model):
     name = models.CharField(max_length=100)                 # 发布会标题
-    limit = models.IntegerField()                       # 参加人数
+    guest_limit = models.IntegerField()                       # 参加人数
     status = models.BooleanField()                      # 发布会状态
     address = models.CharField(max_length=200)          # 发布会地址
     start_time = models.DateTimeField('event_time')                 # 发布会时间

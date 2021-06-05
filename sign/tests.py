@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class Modeltest(TestCase):
     '''测试数据的插入和查询，使用python manage.py 不会真正往数据库插入数据，只是一个测试'''
     def setUp(self):
-        Event.objects.create(id=1,name='詹姆斯退役发布会',limit=2000,status=True,address='洛杉矶',start_time='2025-10-05 10:00:00')
+        Event.objects.create(id=1,name='詹姆斯退役发布会',guest_limit=2000,status=True,address='洛杉矶',start_time='2025-10-05 10:00:00')
         Guest.objects.create(id=1,event_id=1,realname='kebo',sign=False,phone='182707176666',email='182707176666@163.com')
 
     def test_event_models(self):
@@ -87,7 +87,7 @@ class EventManageTest(TestCase):
     '''发布会管理'''
     def setUp(self):
         User.objects.create_user('LBJ','LBJ@email.com','LBJ123456')
-        Event.objects.create(name='xiaomi5',limit=2000,address='beijing',status=True,start_time='2017-08-10 12:30:00')
+        Event.objects.create(name='xiaomi5',guest_limit=2000,address='beijing',status=True,start_time='2017-08-10 12:30:00')
         self.login_user = {'username':'LBJ','password':'LBJ123456'}
 
     def test_event_manage_success(self):
