@@ -28,6 +28,7 @@ def login_action(request):
         if login_username =='' or login_password=='':
             return render(request, "index.html", {"error": "username or password null"})
         else:
+            # 使用django_auth的认证模块，得到auth信息进行认证
             user = auth.authenticate(username=login_username, password=login_password)
             if user is not None:
                 auth.login(request,user)                # 登录
